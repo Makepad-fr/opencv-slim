@@ -29,7 +29,7 @@ jobs:
     strategy:
       matrix:
         DEBIAN_TAG: ["trixie", "trixie-slim", "bullseye", "bullseye-slim", "buster", "buster-slim", "bookworm-slim", "bookworm"]
-        OPENCV_VERSION: ["4.9.0", "4.8.1", "4.8.0", "4.7.0", "4.6.0", "4.5.5", "4.5.4", "4.5.3", "4.5.2", "4.5.1", "4.5.0" ]
+        OPENCV_VERSION: ["4.9.0", "4.8.1", "4.8.0", "4.7.0", "4.6.0" ]
         # OPENCV_VERSION: ["4.9.0", "4.8.1", "4.8.0", "4.7.0", "4.6.0", "4.5.5", "4.5.4", "4.5.3", "4.5.2", "4.5.1", "4.5.0", "4.4.0", "4.3.0", "4.2.0", "4.1.2", "4.1.1", "4.1.0", "4.0.1", "4.0.0"]
     steps:
       - name: Checkout Repo
