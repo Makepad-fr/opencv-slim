@@ -6,7 +6,7 @@ on:
       - main
     paths:
         - 'Dockerfile'
-        - '.github/workflows/build_and_push_docker_image.yml'
+        - '.github/workflows/build_and_push_docker_images.yml'
 
   pull_request:
     branches:
@@ -17,7 +17,7 @@ on:
         - reopened
     paths:  
         - 'Dockerfile'
-        - '.github/workflows/build_and_push_docker_image.yml'
+        - '.github/workflows/build_and_push_docker_images.yml'
 
 concurrency: 
   group: "${{ github.workflow }}-${{ github.ref_name }}-${{ github.event_name }}"
@@ -45,24 +45,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build and Push Docker image
         uses: docker/build-push-action@v5.3.0
         with:
           context: .
           file: Dockerfile
-          load: true # Change to load for PRs, no push
-          tags: makepad/opencv:${{ matrix.DEBIAN_TAG }}-${{ matrix.OPENCV_VERSION }}
-          build-args: |
-            DEBIAN_TAG=${{ matrix.DEBIAN_TAG }}
-            OPENCV_VERSION=${{ matrix.OPENCV_VERSION }}
-
-      - name: Push Docker image
-        if: github.event_name == 'push'
-        uses: docker/build-push-action@v5.3.0
-        with:
-          context: .
-          file: Dockerfile
-          push: true
+          platforms: linux/amd64,linux/arm64/v8
+          push: ${{ github.event_name == 'push' }}
           tags: makepad/opencv:${{ matrix.DEBIAN_TAG }}-${{ matrix.OPENCV_VERSION }}
           build-args: |
             DEBIAN_TAG=${{ matrix.DEBIAN_TAG }}
