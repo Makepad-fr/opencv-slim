@@ -51,7 +51,7 @@ jobs:
           context: .
           file: Dockerfile
           platforms: linux/amd64,linux/arm64/v8
-          load: github.event_name == 'pull_request' # Change to load for PRs,
+          load: true # Change to load for PRs,
           tags: makepad/opencv:${{ matrix.DEBIAN_TAG }}-${{ matrix.OPENCV_VERSION }}
           build-args: |
             DEBIAN_TAG=${{ matrix.DEBIAN_TAG }}
