@@ -6,7 +6,7 @@ on:
       - main
     paths:
         - 'Dockerfile'
-        - '.github/workflows/build_and_push_docker_image.yml'
+        - '.github/workflows/build_and_push_docker_images.yml'
 
   pull_request:
     branches:
@@ -17,7 +17,7 @@ on:
         - reopened
     paths:  
         - 'Dockerfile'
-        - '.github/workflows/build_and_push_docker_image.yml'
+        - '.github/workflows/build_and_push_docker_images.yml'
 
 concurrency: 
   group: "${{ github.workflow }}-${{ github.ref_name }}-${{ github.event_name }}"
